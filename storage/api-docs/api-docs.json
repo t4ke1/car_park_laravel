@@ -1,0 +1,92 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Get available cars API",
+        "description": "Get available cars API",
+        "version": "3.0.0"
+    },
+    "paths": {
+        "/api/getAutoList/{id}": {
+            "get": {
+                "tags": [
+                    "GET"
+                ],
+                "description": "method of obtaining a list of cars available\n            to the current user for a planned time with the ability to\n            filter by car model, by comfort category",
+                "operationId": "ca85f2e9c8b286584a39e751c9a53704",
+                "requestBody": {
+                    "content": {
+                        "Illuminate\\Http\\JsonResponse": {
+                            "schema": {
+                                "properties": {
+                                    "startDate": {
+                                        "type": "string",
+                                        "example": "2024-08-01"
+                                    },
+                                    "startTime": {
+                                        "type": "string",
+                                        "example": "10:00"
+                                    },
+                                    "endTime": {
+                                        "type": "string",
+                                        "example": "12:00"
+                                    },
+                                    "model": {
+                                        "type": "string",
+                                        "example": "zil",
+                                        "nullable": true
+                                    },
+                                    "comfortType": {
+                                        "type": "string",
+                                        "example": null,
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Returns available cars",
+                        "content": {
+                            "Illuminate\\Http\\JsonResponse": {
+                                "schema": {
+                                    "properties": {
+                                        "availableCarId №1": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "availableCarId №2": {
+                                            "type": "integer",
+                                            "example": 3
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No content",
+                        "content": {
+                            "Illuminate\\Http\\JsonResponse": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "Illuminate\\Http\\JsonResponse": {}
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "GET",
+            "description": "GET"
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+    php:
+      build:
+        dockerfile: docker/php/Dockerfile
+      container_name: php_carPark
+      volumes:
+        - .:/app
+      depends_on:
+        - postgres_database
+
+    nginx:
+      image: nginx:1.25.0
+      container_name: nginx_carPark
+      ports:
+      - 80:80
+      volumes:
+        - .:/app
+        - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      depends_on:
+        - php
+
+    postgres_database:
+      image: postgres:16
+      container_name: postgres_carPark
+      ports:
+        - "5432:5432"
+      environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+        - POSTGRES_DATABASE=postgres
+
